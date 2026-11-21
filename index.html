@@ -4,9 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <title>Ppaul</title>
-  <meta name="description" content="Ppaul. — Live Your Life to the Fullest! Cotton piece, American sizes XS to XL." />
+  <meta name="description" content="Ppaul. — Live Your Life to the Fullest! Cotton T-shirt, American sizes XS to XL." />
   <meta property="og:title" content="Ppaul" />
-  <meta property="og:description" content="Ppaul. — Live Your Life to the Fullest! Cotton piece, American sizes XS to XL." />
+  <meta property="og:description" content="Ppaul. — Live Your Life to the Fullest! Cotton T-shirt, American sizes XS to XL." />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" />
   <style>
     :root {
@@ -54,24 +54,36 @@
     .info { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
     .info h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.7rem, 4.5vw, 2.4rem); line-height: 1.05; letter-spacing: -0.02em; margin: 0; text-wrap: balance; }
     .label { font: 500 .72rem var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+    .label-row { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+    .stock-note { font: 500 .75rem var(--font-mono); color: var(--muted); font-variant-numeric: tabular-nums; }
     .price-row { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px 18px; }
     .price { font-family: var(--font-display); font-weight: 800; font-size: 2.6rem; letter-spacing: -0.03em; line-height: 1; font-variant-numeric: tabular-nums; }
     .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; padding: 3px; background: var(--surface); }
     .seg button { border: 0; background: transparent; color: var(--muted); font: 600 .8rem var(--font-mono); padding: 6px 14px; border-radius: 999px; cursor: pointer; }
     .seg button[aria-pressed="true"] { background: var(--fg); color: var(--bg); }
     .group { display: flex; flex-direction: column; gap: 8px; }
+    .choices { display: flex; flex-wrap: wrap; gap: 8px; }
+    .choice-btn { min-height: 44px; display: inline-flex; align-items: center; gap: 8px; border: 1.5px solid var(--line); background: var(--surface); color: var(--fg); font: 600 .95rem var(--font-body); padding: 8px 14px; border-radius: 10px; cursor: pointer; white-space: nowrap; }
+    .choice-btn:hover:not(:disabled) { border-color: var(--accent); }
+    .choice-btn[aria-pressed="true"] { border-color: var(--accent); background: var(--accent); color: var(--accent-fg); }
+    .choice-btn:disabled { opacity: .6; cursor: not-allowed; font-weight: 500; color: var(--muted); }
+    .swatch { width: 14px; height: 14px; border-radius: 999px; border: 1px solid rgba(0,0,0,.18); flex-shrink: 0; }
+    .count { font: 500 .78rem var(--font-mono); opacity: .85; font-variant-numeric: tabular-nums; }
     .sizes { display: flex; flex-wrap: wrap; gap: 8px; }
-    .sizes button { min-width: 54px; border: 1.5px solid var(--line); background: var(--surface); color: var(--fg); font: 600 .95rem var(--font-body); padding: 10px 14px; border-radius: 10px; cursor: pointer; }
-    .sizes button:hover { border-color: var(--accent); }
+    .sizes button { min-height: 44px; min-width: 54px; border: 1.5px solid var(--line); background: var(--surface); color: var(--fg); font: 600 .95rem var(--font-body); padding: 10px 14px; border-radius: 10px; cursor: pointer; }
+    .sizes button:hover:not(:disabled) { border-color: var(--accent); }
     .sizes button[aria-pressed="true"] { border-color: var(--accent); background: var(--accent); color: var(--accent-fg); }
-    .facts { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 0; padding: 0; list-style: none; color: var(--muted); font-size: .92rem; }
+    .sizes button:disabled { opacity: .45; cursor: not-allowed; background: var(--bg); color: var(--muted); text-decoration: line-through; }
+    .facts { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 0; padding: 0; list-style: none; color: var(--muted); font-size: .92rem; font-variant-numeric: tabular-nums; }
     .cta { align-self: flex-start; background: var(--fg); color: var(--bg); text-decoration: none; font: 600 .95rem var(--font-body); padding: 14px 26px; border-radius: 999px; }
     .cta:hover { background: var(--accent); color: var(--accent-fg); }
     .inquiry { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: clamp(20px, 4vw, 36px); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px 36px; scroll-margin-top: 16px; }
     .inquiry h2 { font-family: var(--font-display); font-weight: 800; font-size: 1.8rem; letter-spacing: -0.02em; margin: 0 0 6px; }
     .inquiry p.sub { margin: 0; color: var(--muted); }
     .form { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
-    .row { display: grid; grid-template-columns: 1fr 1fr 90px; gap: 10px; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .row-full { grid-column: 1 / -1; }
+    .subrow { display: grid; grid-template-columns: 1fr 84px; gap: 10px; }
     .field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
     .field label { font: 500 .72rem var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
     input, select, textarea { width: 100%; font: 400 1rem var(--font-body); color: var(--fg); background: var(--bg); border: 1.5px solid var(--line); border-radius: 10px; padding: 11px 12px; }
@@ -90,8 +102,7 @@
     @media (max-width: 720px) {
       .product, .inquiry { grid-template-columns: 1fr; }
       .product { gap: 28px; }
-      .row { grid-template-columns: 1fr 1fr; }
-      .row .field:last-child { grid-column: 1 / -1; }
+      .row { grid-template-columns: 1fr; }
     }
     @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
   </style>
@@ -124,13 +135,36 @@
       </div>
 
       <div class="group">
-        <span class="label">Size, American sizing</span>
+        <span class="label">T-shirt color</span>
+        <div class="choices" role="group" aria-label="T-shirt color">
+          <button type="button" class="choice-btn" aria-pressed="true">
+            <span class="swatch" style="background:#FFFFFF;"></span>
+            <span>White</span>
+          </button>
+          <button type="button" class="choice-btn" disabled aria-disabled="true">
+            <span class="swatch" style="background:#0F0F12;border-color:rgba(255,255,255,.2);"></span>
+            <span>Black (Not available)</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="group">
+        <span class="label">Print color on White</span>
+        <div class="choices" id="prints" role="group" aria-label="Print color"></div>
+      </div>
+
+      <div class="group">
+        <div class="label-row">
+          <span class="label">Size, American sizing</span>
+          <span class="stock-note" id="stockNote">1 left in S</span>
+        </div>
         <div class="sizes" id="sizes" role="group" aria-label="Size"></div>
       </div>
 
-      <ul class="facts">
+      <ul class="facts" id="facts">
         <li>Cotton</li>
-        <li>American sizes XS to XL</li>
+        <li id="factVariant">White tee · Red print</li>
+        <li id="factStock">1 in stock (S)</li>
       </ul>
 
       <a class="cta" href="#inquire">Ask about this piece</a>
@@ -144,17 +178,23 @@
         <p class="sub">Fill this in and your message is written for you. Copy it, then paste it in a DM to @Ppaul. on Instagram.</p>
       </div>
       <div class="row">
-        <div class="field">
+        <div class="field row-full">
           <label for="name">Your name</label>
           <input id="name" type="text" autocomplete="name" maxlength="60" placeholder="Juan Dela Cruz">
         </div>
         <div class="field">
-          <label for="size">Size</label>
-          <select id="size"></select>
+          <label for="printSel">Print (White tee)</label>
+          <select id="printSel"></select>
         </div>
-        <div class="field">
-          <label for="qty">Qty</label>
-          <input id="qty" type="number" min="1" max="50" value="1" inputmode="numeric">
+        <div class="subrow">
+          <div class="field">
+            <label for="size">Size</label>
+            <select id="size"></select>
+          </div>
+          <div class="field">
+            <label for="qty">Qty</label>
+            <input id="qty" type="number" min="1" max="1" value="1" inputmode="numeric">
+          </div>
         </div>
       </div>
       <div class="field">
@@ -184,62 +224,176 @@
   var PHP_PER_USD = 58;
   var SIZES = ["XS", "S", "M", "L", "XL"];
   var ITEM = "Live Your Life to the Fullest!";
+  var PRINTS = {
+    Red:   { label: "Red",   ink: "#D92D20", stock: { XS: 0, S: 1, M: 1, L: 0, XL: 0 } },
+    Blue:  { label: "Blue",  ink: "#2740F5", stock: { XS: 0, S: 2, M: 1, L: 0, XL: 0 } },
+    Black: { label: "Black", ink: "#0F0F12", stock: { XS: 1, S: 1, M: 1, L: 0, XL: 0 } }
+  };
+  var PRINT_KEYS = ["Red", "Blue", "Black"];
   var cur = "PHP";
-  var size = "M";
+  var printKey = "Red";
+  var size = "S";
 
   var $ = function (id) { return document.getElementById(id); };
+
+  function totalStock(key) {
+    return SIZES.reduce(function (sum, s) { return sum + PRINTS[key].stock[s]; }, 0);
+  }
+
+  function firstAvailableSize(key) {
+    for (var i = 0; i < SIZES.length; i++) {
+      if (PRINTS[key].stock[SIZES[i]] > 0) return SIZES[i];
+    }
+    return "S";
+  }
+
+  function currentStock() {
+    return PRINTS[printKey].stock[size] || 0;
+  }
 
   function priceText() {
     if (cur === "PHP") return "₱" + PRICE_PHP;
     return "≈ $" + (PRICE_PHP / PHP_PER_USD).toFixed(2);
   }
 
-  function renderPrice() {
-    $("price").textContent = priceText();
-    $("curPHP").setAttribute("aria-pressed", String(cur === "PHP"));
-    $("curUSD").setAttribute("aria-pressed", String(cur === "USD"));
-    renderMsg();
+  function setPrint(nextKey) {
+    printKey = nextKey;
+    if (PRINTS[printKey].stock[size] <= 0) {
+      size = firstAvailableSize(printKey);
+    }
+    clampQty();
+    renderAll();
+  }
+
+  function setSize(nextSize) {
+    if (PRINTS[printKey].stock[nextSize] <= 0) return;
+    size = nextSize;
+    clampQty();
+    renderAll();
+  }
+
+  function clampQty() {
+    var max = Math.max(1, currentStock());
+    $("qty").max = String(max);
+    var val = parseInt($("qty").value, 10);
+    if (!val || val < 1) val = 1;
+    if (val > max) val = max;
+    $("qty").value = String(val);
+  }
+
+  function renderPrints() {
+    var box = $("prints");
+    box.textContent = "";
+    PRINT_KEYS.forEach(function (k) {
+      var p = PRINTS[k];
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "choice-btn";
+      b.setAttribute("aria-pressed", String(k === printKey));
+
+      var sw = document.createElement("span");
+      sw.className = "swatch";
+      sw.style.background = p.ink;
+
+      var lbl = document.createElement("span");
+      lbl.textContent = p.label;
+
+      var cnt = document.createElement("span");
+      cnt.className = "count";
+      cnt.textContent = "(" + totalStock(k) + ")";
+
+      b.appendChild(sw);
+      b.appendChild(lbl);
+      b.appendChild(cnt);
+      b.addEventListener("click", function () { setPrint(k); });
+      box.appendChild(b);
+    });
+
+    var sel = $("printSel");
+    sel.textContent = "";
+    PRINT_KEYS.forEach(function (k) {
+      var o = document.createElement("option");
+      o.value = k;
+      o.textContent = PRINTS[k].label + " (" + totalStock(k) + " left)";
+      sel.appendChild(o);
+    });
+    sel.value = printKey;
   }
 
   function renderSizes() {
     var box = $("sizes");
     box.textContent = "";
+    var st = PRINTS[printKey].stock;
     SIZES.forEach(function (s) {
+      var count = st[s];
       var b = document.createElement("button");
       b.type = "button";
       b.textContent = s;
-      b.setAttribute("aria-pressed", String(s === size));
-      b.addEventListener("click", function () { size = s; $("size").value = s; renderSizes(); renderMsg(); });
+      b.disabled = count <= 0;
+      b.setAttribute("aria-pressed", String(s === size && count > 0));
+      b.addEventListener("click", function () { setSize(s); });
       box.appendChild(b);
     });
+
+    var sel = $("size");
+    sel.textContent = "";
+    SIZES.forEach(function (s) {
+      if (st[s] > 0) {
+        var o = document.createElement("option");
+        o.value = s;
+        o.textContent = s + " (" + st[s] + ")";
+        sel.appendChild(o);
+      }
+    });
+    sel.value = size;
+  }
+
+  function renderFacts() {
+    var p = PRINTS[printKey];
+    var stk = currentStock();
+    $("stockNote").textContent = stk + " left in " + size;
+    $("factVariant").textContent = "White tee · " + p.label + " print";
+    $("factStock").textContent = stk + " in stock (" + size + ")";
+  }
+
+  function renderPrice() {
+    $("price").textContent = priceText();
+    $("curPHP").setAttribute("aria-pressed", String(cur === "PHP"));
+    $("curUSD").setAttribute("aria-pressed", String(cur === "USD"));
   }
 
   function renderMsg() {
     var name = $("name").value.trim();
+    var max = Math.max(1, currentStock());
     var qty = parseInt($("qty").value, 10);
     if (!qty || qty < 1) qty = 1;
+    if (qty > max) qty = max;
     var note = $("note").value.trim();
     var lines = [];
-    lines.push("Hi Ppaul.! " + (name ? "This is " + name + ". " : "") + "I'd like to ask about your \"" + ITEM + "\" cotton piece.");
-    lines.push("Size: " + size + " (American sizing)");
+    lines.push("Hi Ppaul.! " + (name ? "This is " + name + ". " : "") + "I'd like to ask about your \"" + ITEM + "\" cotton T-shirt.");
+    lines.push("T-shirt color: White");
+    lines.push("Print color: " + PRINTS[printKey].label);
+    lines.push("Size: " + size + " (American sizing, " + currentStock() + " in stock)");
     lines.push("Quantity: " + qty);
     lines.push("Price I saw: " + priceText() + " each");
     if (note) lines.push("\n" + note);
     $("msg").textContent = lines.join("\n");
   }
 
-  var sel = $("size");
-  SIZES.forEach(function (s) {
-    var o = document.createElement("option");
-    o.value = s; o.textContent = s;
-    sel.appendChild(o);
-  });
-  sel.value = size;
-  sel.addEventListener("change", function () { size = sel.value; renderSizes(); renderMsg(); });
+  function renderAll() {
+    renderPrice();
+    renderPrints();
+    renderSizes();
+    renderFacts();
+    renderMsg();
+  }
 
+  $("printSel").addEventListener("change", function () { setPrint($("printSel").value); });
+  $("size").addEventListener("change", function () { setSize($("size").value); });
+  $("qty").addEventListener("blur", function () { clampQty(); renderMsg(); });
   ["name", "qty", "note"].forEach(function (id) { $(id).addEventListener("input", renderMsg); });
-  $("curPHP").addEventListener("click", function () { cur = "PHP"; renderPrice(); });
-  $("curUSD").addEventListener("click", function () { cur = "USD"; renderPrice(); });
+  $("curPHP").addEventListener("click", function () { cur = "PHP"; renderPrice(); renderMsg(); });
+  $("curUSD").addEventListener("click", function () { cur = "USD"; renderPrice(); renderMsg(); });
 
   function selectMsg() {
     var r = document.createRange();
@@ -260,9 +414,9 @@
     } catch (e) { fallback(); }
   });
 
-  renderSizes();
-  renderPrice();
+  clampQty();
+  renderAll();
 })();
 </script>
 </body>
-</html>
+                                           </html>
