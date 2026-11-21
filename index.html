@@ -1,1 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Ppaul</title>
+  <meta name="description" content="Ppaul. — Live Your Life to the Fullest! Cotton piece, American sizes XS to XL." />
+  <meta property="og:title" content="Ppaul" />
+  <meta property="og:description" content="Ppaul. — Live Your Life to the Fullest! Cotton piece, American sizes XS to XL." />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" />
+  <style>
+    :root {
+      --bg: #F3F3F1;
+      --surface: #FFFFFF;
+      --fg: #0F0F12;
+      --muted: #5E5E66;
+      --line: #D9D9D5;
+      --accent: #2740F5;
+      --accent-fg: #FFFFFF;
+      --accent-soft: #DCE1FF;
+      --font-display: "Syne", "Arial Black", system-ui, sans-serif;
+      --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+      --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+      color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #0C0C0F; --surface: #17171C; --fg: #F2F2F4; --muted: #A0A0AA;
+        --line: #2A2A32; --accent: #7B8CFF; --accent-fg: #0B0F3A; --accent-soft: #232A5C;
+        color-scheme: dark;
+      }
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: env(safe-area-inset-top, 0px); }
+    body {
+      margin: 0;
+      background: var(--bg); color: var(--fg);
+      font-family: var(--font-body); font-size: 16px; line-height: 1.6;
+      padding-block: 24px 56px;
+      padding-left: max(16px, env(safe-area-inset-left, 0px));
+      padding-right: max(16px, env(safe-area-inset-right, 0px));
+    }
+    .wrap { max-width: 980px; margin: 0 auto; display: flex; flex-direction: column; gap: 56px; }
+    header { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .mark { font-family: var(--font-display); font-weight: 800; font-size: 1.9rem; letter-spacing: -0.04em; margin: 0; line-height: 1; }
+    .mark span { color: var(--accent); }
+    .ig { font: 500 .85rem var(--font-mono); color: var(--fg); text-decoration: none; border: 1px solid var(--line); padding: 8px 14px; border-radius: 999px; white-space: nowrap; }
+    .ig:hover { border-color: var(--accent); color: var(--accent); }
+    a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+    .product { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 40px; align-items: center; }
+    .panel { aspect-ratio: 4 / 5; max-width: 100%; background: var(--accent); color: var(--accent-fg); border-radius: 18px; padding: clamp(20px, 5vw, 40px); display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; }
+    .panel .tiny { font: 500 .75rem var(--font-mono); letter-spacing: .12em; text-transform: uppercase; opacity: .85; }
+    .panel .big { font-family: var(--font-display); font-weight: 800; font-size: clamp(2rem, 7.5vw, 3.7rem); line-height: .98; letter-spacing: -0.03em; text-transform: uppercase; margin: 0; overflow-wrap: anywhere; }
+    .info { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+    .info h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.7rem, 4.5vw, 2.4rem); line-height: 1.05; letter-spacing: -0.02em; margin: 0; text-wrap: balance; }
+    .label { font: 500 .72rem var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+    .price-row { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px 18px; }
+    .price { font-family: var(--font-display); font-weight: 800; font-size: 2.6rem; letter-spacing: -0.03em; line-height: 1; font-variant-numeric: tabular-nums; }
+    .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; padding: 3px; background: var(--surface); }
+    .seg button { border: 0; background: transparent; color: var(--muted); font: 600 .8rem var(--font-mono); padding: 6px 14px; border-radius: 999px; cursor: pointer; }
+    .seg button[aria-pressed="true"] { background: var(--fg); color: var(--bg); }
+    .group { display: flex; flex-direction: column; gap: 8px; }
+    .sizes { display: flex; flex-wrap: wrap; gap: 8px; }
+    .sizes button { min-width: 54px; border: 1.5px solid var(--line); background: var(--surface); color: var(--fg); font: 600 .95rem var(--font-body); padding: 10px 14px; border-radius: 10px; cursor: pointer; }
+    .sizes button:hover { border-color: var(--accent); }
+    .sizes button[aria-pressed="true"] { border-color: var(--accent); background: var(--accent); color: var(--accent-fg); }
+    .facts { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 0; padding: 0; list-style: none; color: var(--muted); font-size: .92rem; }
+    .cta { align-self: flex-start; background: var(--fg); color: var(--bg); text-decoration: none; font: 600 .95rem var(--font-body); padding: 14px 26px; border-radius: 999px; }
+    .cta:hover { background: var(--accent); color: var(--accent-fg); }
+    .inquiry { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: clamp(20px, 4vw, 36px); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px 36px; scroll-margin-top: 16px; }
+    .inquiry h2 { font-family: var(--font-display); font-weight: 800; font-size: 1.8rem; letter-spacing: -0.02em; margin: 0 0 6px; }
+    .inquiry p.sub { margin: 0; color: var(--muted); }
+    .form { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+    .row { display: grid; grid-template-columns: 1fr 1fr 90px; gap: 10px; }
+    .field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+    .field label { font: 500 .72rem var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+    input, select, textarea { width: 100%; font: 400 1rem var(--font-body); color: var(--fg); background: var(--bg); border: 1.5px solid var(--line); border-radius: 10px; padding: 11px 12px; }
+    input:focus, select:focus, textarea:focus { border-color: var(--accent); outline: 0; box-shadow: 0 0 0 3px var(--accent-soft); }
+    textarea { resize: vertical; min-height: 96px; }
+    .out { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+    .msg { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; background: var(--bg); border: 1.5px dashed var(--line); border-radius: 12px; padding: 16px; font-size: .95rem; flex: 1; user-select: all; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; }
+    .btn { border: 0; cursor: pointer; font: 600 .95rem var(--font-body); padding: 13px 22px; border-radius: 999px; text-decoration: none; display: inline-block; }
+    .btn.primary { background: var(--accent); color: var(--accent-fg); }
+    .btn.ghost { background: transparent; color: var(--fg); border: 1.5px solid var(--line); }
+    .btn:hover { filter: brightness(1.08); }
+    .note { margin: 0; font-size: .85rem; color: var(--muted); }
+    .status { min-height: 1.4em; margin: 0; font: 500 .85rem var(--font-mono); color: var(--accent); }
+    footer { text-align: center; color: var(--muted); font: 400 .78rem var(--font-mono); }
+    @media (max-width: 720px) {
+      .product, .inquiry { grid-template-columns: 1fr; }
+      .product { gap: 28px; }
+      .row { grid-template-columns: 1fr 1fr; }
+      .row .field:last-child { grid-column: 1 / -1; }
+    }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+  </style>
+</head>
+<body>
+<main class="wrap">
+  <header>
+    <p class="mark">Ppaul<span>.</span></p>
+    <a class="ig" href="https://www.instagram.com/ppaul./" target="_blank" rel="noopener">Instagram @Ppaul.</a>
+  </header>
 
+  <section class="product" aria-label="Product">
+    <div class="panel" role="img" aria-label="Product design: Live your life to the fullest">
+      <span class="tiny">Ppaul. / Cotton</span>
+      <p class="big">Live your life to the fullest!</p>
+    </div>
+
+    <div class="info">
+      <div class="group">
+        <span class="label">The piece</span>
+        <h1>Live Your Life to the Fullest!</h1>
+      </div>
+
+      <div class="price-row">
+        <span class="price" id="price">&#8369;499</span>
+        <div class="seg" role="group" aria-label="Currency">
+          <button type="button" id="curPHP" aria-pressed="true">PHP</button>
+          <button type="button" id="curUSD" aria-pressed="false">USD</button>
+        </div>
+      </div>
+
+      <div class="group">
+        <span class="label">Size, American sizing</span>
+        <div class="sizes" id="sizes" role="group" aria-label="Size"></div>
+      </div>
+
+      <ul class="facts">
+        <li>Cotton</li>
+        <li>American sizes XS to XL</li>
+      </ul>
+
+      <a class="cta" href="#inquire">Ask about this piece</a>
+    </div>
+  </section>
+
+  <section class="inquiry" id="inquire" aria-label="Inquiry">
+    <div class="form">
+      <div>
+        <h2>Send an inquiry</h2>
+        <p class="sub">Fill this in and your message is written for you. Copy it, then paste it in a DM to @Ppaul. on Instagram.</p>
+      </div>
+      <div class="row">
+        <div class="field">
+          <label for="name">Your name</label>
+          <input id="name" type="text" autocomplete="name" maxlength="60" placeholder="Juan Dela Cruz">
+        </div>
+        <div class="field">
+          <label for="size">Size</label>
+          <select id="size"></select>
+        </div>
+        <div class="field">
+          <label for="qty">Qty</label>
+          <input id="qty" type="number" min="1" max="50" value="1" inputmode="numeric">
+        </div>
+      </div>
+      <div class="field">
+        <label for="note">Your message</label>
+        <textarea id="note" maxlength="400" placeholder="Is it available? How much is shipping to my city?"></textarea>
+      </div>
+    </div>
+
+    <div class="out">
+      <span class="label">Your message</span>
+      <p class="msg" id="msg"></p>
+      <div class="actions">
+        <button type="button" class="btn primary" id="copy">Copy message</button>
+        <a class="btn ghost" href="https://www.instagram.com/ppaul./" target="_blank" rel="noopener">Open Instagram</a>
+      </div>
+      <p class="status" id="status" role="status"></p>
+      <p class="note">This page does not send messages. Your inquiry reaches Ppaul. when you paste it into an Instagram DM.</p>
+    </div>
+  </section>
+
+  <footer>Ppaul. &middot; Live your life to the fullest.</footer>
+</main>
+
+<script>
+(function () {
+  var PRICE_PHP = 499;
+  var PHP_PER_USD = 58;
+  var SIZES = ["XS", "S", "M", "L", "XL"];
+  var ITEM = "Live Your Life to the Fullest!";
+  var cur = "PHP";
+  var size = "M";
+
+  var $ = function (id) { return document.getElementById(id); };
+
+  function priceText() {
+    if (cur === "PHP") return "₱" + PRICE_PHP;
+    return "≈ $" + (PRICE_PHP / PHP_PER_USD).toFixed(2);
+  }
+
+  function renderPrice() {
+    $("price").textContent = priceText();
+    $("curPHP").setAttribute("aria-pressed", String(cur === "PHP"));
+    $("curUSD").setAttribute("aria-pressed", String(cur === "USD"));
+    renderMsg();
+  }
+
+  function renderSizes() {
+    var box = $("sizes");
+    box.textContent = "";
+    SIZES.forEach(function (s) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.textContent = s;
+      b.setAttribute("aria-pressed", String(s === size));
+      b.addEventListener("click", function () { size = s; $("size").value = s; renderSizes(); renderMsg(); });
+      box.appendChild(b);
+    });
+  }
+
+  function renderMsg() {
+    var name = $("name").value.trim();
+    var qty = parseInt($("qty").value, 10);
+    if (!qty || qty < 1) qty = 1;
+    var note = $("note").value.trim();
+    var lines = [];
+    lines.push("Hi Ppaul.! " + (name ? "This is " + name + ". " : "") + "I'd like to ask about your \"" + ITEM + "\" cotton piece.");
+    lines.push("Size: " + size + " (American sizing)");
+    lines.push("Quantity: " + qty);
+    lines.push("Price I saw: " + priceText() + " each");
+    if (note) lines.push("\n" + note);
+    $("msg").textContent = lines.join("\n");
+  }
+
+  var sel = $("size");
+  SIZES.forEach(function (s) {
+    var o = document.createElement("option");
+    o.value = s; o.textContent = s;
+    sel.appendChild(o);
+  });
+  sel.value = size;
+  sel.addEventListener("change", function () { size = sel.value; renderSizes(); renderMsg(); });
+
+  ["name", "qty", "note"].forEach(function (id) { $(id).addEventListener("input", renderMsg); });
+  $("curPHP").addEventListener("click", function () { cur = "PHP"; renderPrice(); });
+  $("curUSD").addEventListener("click", function () { cur = "USD"; renderPrice(); });
+
+  function selectMsg() {
+    var r = document.createRange();
+    r.selectNodeContents($("msg"));
+    var s = window.getSelection();
+    s.removeAllRanges();
+    s.addRange(r);
+  }
+
+  $("copy").addEventListener("click", function () {
+    var text = $("msg").textContent;
+    var st = $("status");
+    function fallback() { selectMsg(); st.textContent = "Press and hold the selected text, then choose Copy."; }
+    try {
+      navigator.clipboard.writeText(text).then(function () {
+        st.textContent = "Copied. Now paste it in your Instagram DM.";
+      }, fallback);
+    } catch (e) { fallback(); }
+  });
+
+  renderSizes();
+  renderPrice();
+})();
+</script>
+</body>
+</html>
